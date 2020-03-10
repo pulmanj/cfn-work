@@ -121,12 +121,18 @@ Resources:
     Properties:
       AllocationId: !GetAtt NatGateway1EIP.AllocationId
       SubnetId: !Ref PublicSubnet1
+       Tags:
+        - Key: Name
+          Value: !Ref EnvironmentName     
 
   NatGateway2:
     Type: AWS::EC2::NatGateway
     Properties:
       AllocationId: !GetAtt NatGateway2EIP.AllocationId
       SubnetId: !Ref PublicSubnet2
+      Tags:
+        - Key: Name
+          Value: !Ref EnvironmentName
 
   PublicRouteTable:
     Type: AWS::EC2::RouteTable
@@ -202,17 +208,21 @@ Resources:
   NoIngressSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
+      Tags:
+        -
+          Key: "Name"
+          Value: "no-ingress-sg"
       GroupName: "no-ingress-sg"
       GroupDescription: "Security group with no ingress rule"
       VpcId: !Ref VPC
       
-  SSHIngressSecurityGroup
+  SSHIngressSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties: 
       Tags:
         -
           Key: "Name"
-          Value: "SSH-SG"
+          Value: "SSH-sg"
       VpcId: !Ref VPC
       GroupDescription: "Security Group to allow SSH Ingress"
       GroupName: "SSH-ingress-sg"
