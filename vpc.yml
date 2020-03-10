@@ -205,6 +205,23 @@ Resources:
       GroupName: "no-ingress-sg"
       GroupDescription: "Security group with no ingress rule"
       VpcId: !Ref VPC
+      
+  SSHIngressSecurityGroup
+    Type: AWS::EC2::SecurityGroup
+    Properties: 
+      Tags:
+        -
+          Key: "Name"
+          Value: "SSH-SG"
+      VpcId: !Ref VPC
+      GroupDescription: "Security Group to allow SSH Ingress"
+      GroupName: "SSH-ingress-sg"
+      SecurityGroupIngress:
+        - CidrIp: 0.0.0.0/0
+          IpProtocol: tcp
+          Description: "SSH Ingress"
+          FromPort: 22
+          ToPort: 22
 
 Outputs:
   VPC:
