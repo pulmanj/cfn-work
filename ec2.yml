@@ -24,3 +24,9 @@ Resources:
       KeyName: automation
       CreditSpecification:
         CPUCredits: standard
+      UserData:
+        Fn::Base64:
+            !Sub |
+               #!/bin/bash -xe
+               yum update -y
+               touch /home/ec2-user/userdata_ran
