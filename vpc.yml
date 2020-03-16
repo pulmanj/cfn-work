@@ -230,8 +230,33 @@ Resources:
         - CidrIp: 0.0.0.0/0
           IpProtocol: tcp
           Description: "SSH Ingress"
-          FromPort: 22
+          FromPort: -1
           ToPort: 22
+          
+# SG for some common web ports
+  WebIngressSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      Tags:
+        -
+          Key: Name
+          Value: Web-sg
+      VpcId: !Ref VPC
+      GroupDescription: "Security Group to allow common Web Ports"
+      GroupName: Web-ingress-sg
+      SecurityGroupIngress:
+      - CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: -1
+          ToPort: 80
+        - IpProtocol: tcp
+          FromPort: -1
+          ToPort: 443
+        - IpProtocol: tcp
+          FromPort: -1
+          ToPort: 8080 - 8085
+
+      
 
 Outputs:
   VPC:
