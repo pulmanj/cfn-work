@@ -3,30 +3,25 @@ Description: Tiny Test Instance
 Resources:
   MyEC2Instance:
     Type: AWS::EC2::Instance
-    Metadata: 
-      AWS::CloudFormation::Init: 
-        configSets: 
-          Install: ["Install"]
-        Install:
-          packages:
-            yum:
-              amazon-linux-extras: []
-              docker: []
-              
     Properties:
-
-      Tags:
-        -
-          Key: "Name"
-          Value: "TinyTestInstance"
-      ImageId: "ami-0389b2a3c4948b1a0"
+      ImageId: ami-0389b2a3c4948b1a0
       InstanceType: t3a.nano
       KeyName: automation
       CreditSpecification:
         CPUCredits: standard
       UserData:
         Fn::Base64:
-            !Sub |
-               #!/bin/bash -xe
-               yum update -y
-               touch /home/ec2-user/userdata_ran
+          !Sub |
+            #!/bin/bash -xe
+            yum install -y docker;
+            service docker start;
+            usermod -aG docker ec2-user;
+            docker run -d -p 80:80 --name nginx nginx;
+            touch /home/ec2-user/userdata_ran;
+      Tags:
+        -
+          Key: Name
+          Value: TinyTestInstance
+      SecurityGroupIds:
+        - sg-d91becb0
+        - sg-0ffca9793f9a69a66      
