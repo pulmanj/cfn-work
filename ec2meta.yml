@@ -1,3 +1,5 @@
+# This was an attempt to use Metadata but could not get to work
+# as per examples from AWS
 AWSTemplateFormatVersion: "2010-09-09"
 Description: "Tiny Test Meta Version"
 Resources:
@@ -26,6 +28,7 @@ Resources:
         CPUCredits: standard
       UserData:
         Fn::Base64:
+        # The cfn-init call fails. Reports StackId not found but it is found and correct!
           !Sub |
             #!/bin/bash -xe
             /opt/aws/bin/cfn-init -v -s ${AWS::StackId} -r MyEC2Instance;
