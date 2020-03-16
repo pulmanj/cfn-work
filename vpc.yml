@@ -121,14 +121,14 @@ Resources:
     Properties:
       AllocationId: !GetAtt NatGateway1EIP.AllocationId
       SubnetId: !Ref PublicSubnet1
-       Tags:
-        - Key: Name
-          Value: !Ref EnvironmentName     
+      Tags:
+       - Key: Name
+         Value: !Ref EnvironmentName     
 
   NatGateway2:
     Type: AWS::EC2::NatGateway
     Properties:
-      AllocationId: !GetAtt NatGateway2EIP.AllocationId
+      AllocationId: !GetAtt NatGateway2EIP.AllocationIdSS
       SubnetId: !Ref PublicSubnet2
       Tags:
         - Key: Name
@@ -233,7 +233,6 @@ Resources:
           FromPort: -1
           ToPort: 22
           
-# SG for some common web ports
   WebIngressSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -245,18 +244,18 @@ Resources:
       GroupDescription: "Security Group to allow common Web Ports"
       GroupName: Web-ingress-sg
       SecurityGroupIngress:
-      - CidrIp: 0.0.0.0/0
         - IpProtocol: tcp
           FromPort: -1
           ToPort: 80
+          CidrIp: 0.0.0.0/0
         - IpProtocol: tcp
           FromPort: -1
           ToPort: 443
+          CidrIp: 0.0.0.0/0
         - IpProtocol: tcp
           FromPort: -1
           ToPort: 8080 - 8085
-
-      
+          CidrIp: 0.0.0.0/0
 
 Outputs:
   VPC:
