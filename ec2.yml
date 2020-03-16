@@ -3,18 +3,7 @@ Description: Tiny Test Instance
 Resources:
   MyEC2Instance:
     Type: AWS::EC2::Instance
-    Metadata: 
-      AWS::CloudFormation::Init: 
-        configSets: 
-          Install: ["Install"]
-        Install:
-          packages:
-            yum:
-              amazon-linux-extras: []
-              docker: []
-              
     Properties:
-
       Tags:
         -
           Key: "Name"
