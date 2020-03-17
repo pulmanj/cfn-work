@@ -1,11 +1,13 @@
+# This will create a Docker Manager Node
 AWSTemplateFormatVersion: "2010-09-09"
 Description: Tiny Test Instance
 Resources:
 
+  # Will need adaption to get network details from VPC standup
   MyENI:
     Type: AWS::EC2::NetworkInterface
     Properties: 
-      Description: "Attempt to define a fixed private ip"
+      Description: "Need to fix IP to advertise mgr status on"
       GroupSet: 
         - sg-0ffca9793f9a69a66
         - sg-d91becb0
