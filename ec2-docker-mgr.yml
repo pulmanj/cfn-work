@@ -1,7 +1,17 @@
 # This will create a Docker Manager Node
 AWSTemplateFormatVersion: "2010-09-09"
 Description: "Docker Manager Node"
+
 Resources:
+  ClusterJoinCmd:
+    Type: AWS::SSM::Parameter
+    Properties: 
+      Description: "Command to join worker node to Docker Swarm"
+      Name: ClusterJoinCmd
+      Tier: Standard
+      Type: String
+      Value: String
+
   # Will need adaption to get network details from VPC standup
   MyENI:
     Type: AWS::EC2::NetworkInterface
