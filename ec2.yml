@@ -14,7 +14,7 @@ Resources:
           !Sub |
             #!/bin/bash -xe
             yum install -y docker;
-            service docker start;
+            systemctl start docker;
             usermod -aG docker ec2-user;
             docker run -d -p 80:80 --name nginx nginx;
             touch /home/ec2-user/userdata_ran;
