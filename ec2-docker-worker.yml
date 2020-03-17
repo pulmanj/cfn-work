@@ -1,6 +1,6 @@
-# This will create a Docker Manager Node
+# This will create a Docker Worker Node
 AWSTemplateFormatVersion: "2010-09-09"
-Description: "Docker Manager Node"
+Description: "Docker Worker Node"
 Resources:
   # Will need adaption to get network details from VPC standup
   MyENI:
@@ -10,7 +10,7 @@ Resources:
       GroupSet: 
         - sg-0ffca9793f9a69a66
         - sg-d91becb0
-      PrivateIpAddress: "172.31.32.20"
+      PrivateIpAddress: "172.31.32.21"
       SubnetId: subnet-746b951d
 
   MyEC2Instance:
@@ -32,9 +32,8 @@ Resources:
             yum install -y docker;
             systemctl start docker;
             usermod -aG docker ec2-user;
-            echo $(docker swarm init --advertise-addr 172.31.32.20) >> /tmp/dockerjoin.txt;
-            cat /tmp/dockerjoin.txt | sed 's/.*command: //' | sed 's/172.*$//' >> /tmp/join.txt;
+            scp ec2-user@172.31.32.20/tmp/join.txt /tmp/join.txt;
       Tags:
         -
           Key: Name
-          Value: DockerManagerNode
+          Value: DockerWorkerNode
