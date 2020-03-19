@@ -6,11 +6,13 @@ Resources:
   ClusterJoinCmd:
     Type: AWS::SSM::Parameter
     Properties: 
-      Description: "Command to join worker node to Docker Swarm"
+      Description: "Param to store command to join worker node to Docker Swarm"
       Name: ClusterJoinCmd
       Tier: Standard
       Type: String
-      Value: String
+      Value: "Temp value as null not accepted"
+      Tags:
+        Name: Demo
 
   # Will need adaption to get network details from VPC standup
   MyENI:
@@ -22,6 +24,10 @@ Resources:
         - sg-d91becb0
       PrivateIpAddress: "172.31.32.20"
       SubnetId: subnet-746b951d
+      Tags:
+        -
+          Key: Name
+          Value: Demo      
 
   MyEC2Instance:
     Type: AWS::EC2::Instance
@@ -29,7 +35,8 @@ Resources:
       NetworkInterfaces:
         - NetworkInterfaceId: !Ref MyENI
           DeviceIndex: 0
-
+      IamInstanceProfile:
+        !Ref MyProfile
       ImageId: ami-0389b2a3c4948b1a0
       InstanceType: t3a.nano
       KeyName: automation
@@ -39,12 +46,54 @@ Resources:
         Fn::Base64:
           !Sub |
             #!/bin/bash -xe
+            yum -y update;
             yum install -y docker;
             systemctl start docker;
             usermod -aG docker ec2-user;
             echo $(docker swarm init --advertise-addr 172.31.32.20) >> /tmp/dockerjoin.txt;
             cat /tmp/dockerjoin.txt | sed 's/.*command: //' | sed 's/172.*$//' >> /tmp/join.txt;
+            aws ssm put-parameter --name /ClusterJoinCmd --value "$(cat /tmp/join.txt)" --type String --region eu-west-2 --overwrite;
       Tags:
         -
           Key: Name
           Value: Demo
+  MgrRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: EC2-SSM-Params-Role
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+              - ec2.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Description: Role for EC2 to access SSM Parameters via CLI
+      MaxSessionDuration: 3600 # Role effective for 1 hour
+      Path: /
+      Policies: 
+        - PolicyName: EC2-SSM-Params-Access
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ssm:PutParameter
+                  - ssm:GetParameters
+                  - ssm:GetParameter
+                Resource: arn:aws:ssm:*:*:parameter/*
+      Tags: 
+        -
+          Key: Name
+          Value: Demo
+  
+  MyProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties: 
+      InstanceProfileName: Access-SSM-Params-Profile
+      Path: /
+      Roles: 
+        - EC2-SSM-Params-Role
+
