@@ -47,4 +47,4 @@ Resources:
       Tags:
         -
           Key: Name
-          Value: DockerManagerNode
+          Value: Demo

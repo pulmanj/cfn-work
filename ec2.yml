@@ -21,7 +21,7 @@ Resources:
       Tags:
         -
           Key: Name
-          Value: TinyTestInstance
+          Value: Demo
       SecurityGroupIds:
         - sg-d91becb0
         - sg-0ffca9793f9a69a66      

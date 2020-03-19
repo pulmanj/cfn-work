@@ -36,4 +36,4 @@ Resources:
       Tags:
         -
           Key: Name
-          Value: DockerWorkerNode
+          Value: Demo
