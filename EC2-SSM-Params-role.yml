@@ -1,10 +1,10 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: Role & policy to enable EC2 to use aws cli with SSM parameters
+Description: Role & policy to enable EC2 to access SSM Params via CLI
 Resources:
   MgrRole:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: EC2-SSM-Parameters-Role
+      RoleName: EC2-SSM-Params-Role
       AssumeRolePolicyDocument:
         Version: 2012-10-17
         Statement:
@@ -14,11 +14,11 @@ Resources:
               - ec2.amazonaws.com
             Action:
               - 'sts:AssumeRole'
-      Description: EC2 Docker Mgr Role to use CLI
+      Description: Role for EC2 to access SSM Parameters via CLI
       MaxSessionDuration: 3600 # Role effective for 1 hour
       Path: /
       Policies: 
-        - PolicyName: EC2-SSM-Access
+        - PolicyName: EC2-SSM-Params-Access
           PolicyDocument:
             Version: 2012-10-17
             Statement:
@@ -31,6 +31,6 @@ Resources:
       Tags: 
         -
           Key: Name
-          Value: EC2-Use-SSM-Parameters-Role
+          Value: Demo
 
  
