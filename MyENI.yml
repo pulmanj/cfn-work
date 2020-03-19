@@ -4,7 +4,7 @@ Resources:
   MyENI:
     Type: AWS::EC2::NetworkInterface
     Properties: 
-      Description: "Attempt to define a fixed private ip"
+      Description: "Use to define static private ip"
       GroupSet: 
         - sg-0ffca9793f9a69a66
         - sg-d91becb0
