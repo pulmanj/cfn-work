@@ -36,7 +36,7 @@ Resources:
             yum install -y docker jq;
             systemctl start docker;
             usermod -aG docker ec2-user;
-           # aws ssm get-parameter --name /ClusterJoinCmd --region eu-west-2;
+            $(aws ssm get-parameter --name /ClusterJoinCmd --region eu-west-2 | jq -r '.Parameter.Value');
       Tags:
         -
           Key: Name
