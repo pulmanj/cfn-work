@@ -12,7 +12,7 @@ Resources:
       Type: String
       Value: "Temp value as null not accepted"
       Tags:
-        Name: Demo
+        Name: Demo-Mgr
 
   # Will need adaption to get network details from VPC standup
   MyENI:
@@ -27,9 +27,10 @@ Resources:
       Tags:
         -
           Key: Name
-          Value: Demo      
+          Value: Demo-Mgr      
 
   MyEC2Instance:
+    DependsOn: MyProfile
     Type: AWS::EC2::Instance
     Properties:
       NetworkInterfaces:
@@ -47,7 +48,7 @@ Resources:
           !Sub |
             #!/bin/bash -xe
             yum -y update;
-            yum install -y docker;
+            yum install -y docker jq;
             systemctl start docker;
             usermod -aG docker ec2-user;
             echo $(docker swarm init --advertise-addr 172.31.32.20) >> /tmp/dockerjoin.txt;
@@ -56,7 +57,7 @@ Resources:
       Tags:
         -
           Key: Name
-          Value: Demo
+          Value: Demo-Mgr
   MgrRole:
     Type: AWS::IAM::Role
     Properties:
@@ -89,13 +90,13 @@ Resources:
       Tags: 
         -
           Key: Name
-          Value: Demo
+          Value: Demo-Mgr
   
   MyProfile:
+    DependsOn: MgrRole
     Type: AWS::IAM::InstanceProfile
     Properties: 
       InstanceProfileName: Access-SSM-Params-Profile
       Path: /
       Roles: 
         - EC2-SSM-Params-Role
-    DependsOn: MgrRole

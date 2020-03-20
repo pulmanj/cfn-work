@@ -15,7 +15,7 @@ Resources:
       Tags:
         -
           Key: Name
-          Value: Demo
+          Value: Demo-Work
 
   MyEC2Instance:
     Type: AWS::EC2::Instance
@@ -36,11 +36,11 @@ Resources:
             yum install -y docker jq;
             systemctl start docker;
             usermod -aG docker ec2-user;
-            aws ssm get-parameter --name /ClusterJoinCmd --region eu-west-2;
+           # aws ssm get-parameter --name /ClusterJoinCmd --region eu-west-2;
       Tags:
         -
           Key: Name
-          Value: Demo
+          Value: Demo-Work
 # Assumes the existence of the role - which is created by the Docker Mgr instantiation
   WorkerProfile:
     Type: AWS::IAM::InstanceProfile
