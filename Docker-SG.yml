@@ -5,14 +5,18 @@ Resources:
   SwarmSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: Swarm server
-      GroupName: swarm
+      GroupDescription: Swarm comms
+      GroupName: Swarm-SG
       VpcId: vpc-49ba5220
-
+      Tags:
+        -
+          Key: Name
+          Value: Demo-DockerSG
 
   SwarmIngress1:
     Type: AWS::EC2::SecurityGroupIngress
     Properties:
+      Description: Node Comms via Mgr
       GroupId: !Ref SwarmSecurityGroup
       IpProtocol: tcp
       FromPort: 2377
@@ -22,6 +26,7 @@ Resources:
   SwarmIngress2:
     Type: AWS::EC2::SecurityGroupIngress
     Properties:
+      Description: Container network discovery
       GroupId: !Ref SwarmSecurityGroup
       IpProtocol: tcp
       FromPort: 7946
@@ -31,6 +36,7 @@ Resources:
   SwarmIngress3:
     Type: AWS::EC2::SecurityGroupIngress
     Properties:
+      Description: Container network discovery
       GroupId: !Ref SwarmSecurityGroup
       IpProtocol: udp
       FromPort: 7946
@@ -40,6 +46,7 @@ Resources:
   SwarmIngress4:
     Type: AWS::EC2::SecurityGroupIngress
     Properties:
+      Description: Overlay network traffic - container ingress
       GroupId: !Ref SwarmSecurityGroup
       IpProtocol: udp
       FromPort: 4789
@@ -49,6 +56,7 @@ Resources:
   SwarmIngress5:
     Type: AWS::EC2::SecurityGroupIngress
     Properties:
+      Description: Docker Machine
       GroupId: !Ref SwarmSecurityGroup
       IpProtocol: tcp
       FromPort: 2376
