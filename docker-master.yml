@@ -33,7 +33,7 @@ Parameters:
     Type: String
     Default: 10.192.21.0/24
 
-Resources: nesting
+Resources:
   VPCStack:
     Type: AWS::CloudFormation::Stack
     Properties :
