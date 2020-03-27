@@ -1,9 +1,6 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Resources: 
-  myStackWithParams: 
+  NestedVPC:
     Type: AWS::CloudFormation::Stack
-    Properties: 
-      TemplateURL: "https://s3.amazonaws.com/cloudformation-templates-us-east-2/EC2ChooseAMI.template"
-      Parameters: 
-        InstanceType: "t1.micro"
-        KeyName: "mykey"
+    Properties :
+      TemplateURL: https://s3.console.aws.amazon.com/s3/buckets/cfn-demo-ianp?region=eu-west-2/vpc2.yml
