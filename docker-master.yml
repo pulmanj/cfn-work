@@ -3,4 +3,5 @@ Resources:
   NestedVPC:
     Type: AWS::CloudFormation::Stack
     Properties :
-      TemplateURL: https://s3.console.aws.amazon.com/s3/buckets/cfn-demo-ianp?region=eu-west-2/vpc2.yml
+      TemplateURL: https://s3-eu-west-2.amazonaws.com/cfn-demo-ianp/docker-master.yml
+      
