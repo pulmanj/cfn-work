@@ -250,7 +250,7 @@ Resources:
           CidrIp: 0.0.0.0/0
           Description: "Some common web service ports"
 
-   DockerSecurityGroup:
+  DockerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       Tags:
