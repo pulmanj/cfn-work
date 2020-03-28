@@ -4,13 +4,14 @@ Description:  This template deploys a VPC, with a pair of public and private sub
   across two Availability Zones. It deploys an internet gateway, with a default
   route on the public subnets. It deploys a pair of NAT gateways (one in each AZ),
   and default routes for them in the private subnets.
-  
+
 Parameters:
   EnvironmentName:
-    Description: Environment Name
+    Description: Environment Name for tags
     Type: String
 
   VpcCIDR:
+    Description: VPC CIDR Block
     Type: String
 
   PublicSubnet1CIDR:
@@ -248,6 +249,38 @@ Resources:
           ToPort: 8085
           CidrIp: 0.0.0.0/0
           Description: "Some common web service ports"
+
+   DockerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      Tags:
+        -
+          Key: Name
+          Value: !Join ["-", [!Ref EnvironmentName, docker-sg]]
+      VpcId: !Ref VPC
+      GroupDescription: "Security Group to allow Docker Ports"
+      GroupName: Web-ingress-sg
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 2376
+          ToPort: 2376
+          CidrIp: 0.0.0.0/0
+          Description: "Docker Machine"
+        - IpProtocol: tcp
+          FromPort: 2377
+          ToPort: 2377
+          CidrIp: 0.0.0.0/0
+          Description: "Docker Swarm Node Comms"
+        - IpProtocol: tcp
+          FromPort: 7946
+          ToPort: 7946
+          CidrIp: 0.0.0.0/0
+          Description: "Container Network Discovery"
+        - IpProtocol: udp
+          FromPort: 7946
+          ToPort: 7946
+          CidrIp: 0.0.0.0/0
+          Description: "Container Network Discovery"       
 
 Outputs:
   VPC:

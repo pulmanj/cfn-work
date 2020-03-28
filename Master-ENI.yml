@@ -1,0 +1,16 @@
+# Create standalone ENI
+AWSTemplateFormatVersion: "2010-09-09"
+Resources:
+  MyENI:
+    Type: AWS::EC2::NetworkInterface
+    Properties: 
+      Description: "Use to define static private ip"
+      GroupSet: 
+        - sg-0ffca9793f9a69a66
+        - sg-d91becb0
+      PrivateIpAddress: "172.31.32.20"
+      SubnetId: subnet-746b951d
+      Tags:
+        -
+          Key: Name
+          Value: Demo
