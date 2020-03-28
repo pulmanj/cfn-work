@@ -5,14 +5,6 @@ Description:  This template deploys a VPC, with a pair of public and private sub
   route on the public subnets. It deploys a pair of NAT gateways (one in each AZ),
   and default routes for them in the private subnets.
   
-Parameters:
-  EnvironmentName: !Ref EnvironmentName
-  VpcCIDR: !Ref VpcCIDR
-  PublicSubnet1CIDR: !Ref PublicSubnet1CIDR
-  PublicSubnet2CIDR: !Ref PublicSubnet2CIDR
-  PrivateSubnet1CIDR: !Ref PrivateSubnet1CIDR
-  PrivateSubnet2CIDR: !Ref PrivateSubnet2CIDR
-
 Resources:
   VPC:
     Type: AWS::EC2::VPC
