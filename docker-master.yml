@@ -37,11 +37,6 @@ Resources:
     Properties :
       TemplateURL: https://s3-eu-west-2.amazonaws.com/cfn-demo-ianp/vpc-nested.yml
       TimeoutInMinutes: 5
-      Parameters:
-        VpcCIDR: !Ref VpcCIDR
-        PublicSubnet1CIDR: !Ref PublicSubnet1CIDR
-        PublicSubnet2CIDR: !Ref PublicSubnet2CIDR
-        PrivateSubnet1CIDR: !Ref PrivateSubnet1CIDR
-        PrivateSubnet2CIDR: !Ref PrivateSubnet2CIDR
+
 
 
