@@ -39,6 +39,7 @@ Resources:
       TimeoutInMinutes: 5
       Parameters:
         EnvironmentName: !Ref EnvironmentName
+        VpcCIDR: !Ref VpcCIDR
 
     
 
