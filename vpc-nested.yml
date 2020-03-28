@@ -7,7 +7,7 @@ Description:  This template deploys a VPC, with a pair of public and private sub
   
 Parameters:
   EnvironmentName: !Ref EnvironmentName
-  VpcCIDR1: !Ref VpcCIDR
+  VpcCIDR1: !Ref VpcCIDR1
   PublicSubnet1CIDR1: !Ref PublicSubnet1CIDR1
   PublicSubnet2CIDR1: !Ref PublicSubnet2CIDR1
   PrivateSubnet1CIDR1: !Ref PrivateSubnet1CIDR1
