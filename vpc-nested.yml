@@ -259,7 +259,7 @@ Resources:
           Value: !Join ["-", [!Ref EnvironmentName, docker-sg]]
       VpcId: !Ref VPC
       GroupDescription: "Security Group to allow Docker Ports"
-      GroupName: Web-ingress-sg
+      GroupName: docker-sg
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 2376
