@@ -1,16 +1,33 @@
 # Create standalone ENI
 AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  EnvironmentName:
+    Description: Environment Name for tags
+    Type: String
+  VpcCIDR:
+    Description: VPC CIDR Block
+    Type: String
+  PublicSubnet1CIDR:
+    Type: String
+  PublicSubnet2CIDR:
+    Type: String
+  PrivateSubnet1CIDR:
+     Type: String
+  PrivateSubnet2CIDR:
+    Type: String
+
 Resources:
   MyENI:
     Type: AWS::EC2::NetworkInterface
     Properties: 
-      Description: "Use to define static private ip"
+      Description: "Use to define static private ip for master node"
       GroupSet: 
-        - sg-0ffca9793f9a69a66
-        - sg-d91becb0
-      PrivateIpAddress: "172.31.32.20"
-      SubnetId: subnet-746b951d
+        - !Ref DockerSecurityGroup
+        - !Ref SSHIngressSecurityGroup
+      PrivateIpAddress: "10.192.10.20"
+      SubnetId: !Ref PublicSubnet1
       Tags:
         -
           Key: Name
-          Value: Demo
+          Value: !Sub ${EnvironmentName}-MasterNodeENI
