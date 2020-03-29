@@ -242,9 +242,7 @@ Resources:
         - IpProtocol: tcp
           FromPort: 443
           ToPort: 443
-          CidrIp: 0.0.0.0/0
-          Description: "Standard HTTPS"
-        - IpProtocol: tcp
+          CidrIp: 0.0.0.0/0SSHIngressSecurityGroup
           FromPort: 8080
           ToPort: 8085
           CidrIp: 0.0.0.0/0
@@ -314,3 +312,11 @@ Outputs:
   NoIngressSecurityGroup:
     Description: Security group with no ingress rule
     Value: !Ref NoIngressSecurityGroup
+
+  DockerSecurityGroup:
+    Description: "Security Group to allow Docker Ports"
+    Value: !Ref DockerSecurityGroup
+
+  SSHIngressSecurityGroup:
+    Description: "Security Group to allow SSH Ingress"
+    Value: !Ref SSHIngressSecurityGroup

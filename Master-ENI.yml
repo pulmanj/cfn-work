@@ -5,17 +5,12 @@ Parameters:
   EnvironmentName:
     Description: Environment Name for tags
     Type: String
-  VpcCIDR:
-    Description: VPC CIDR Block
-    Type: String
-  PublicSubnet1CIDR:
-    Type: String
-  PublicSubnet2CIDR:
-    Type: String
-  PrivateSubnet1CIDR:
-     Type: String
-  PrivateSubnet2CIDR:
-    Type: String
+  DockerSecurityGroup:
+    Fn::GetAtt: [ VPCStack , Outputs.DockerSecurityGroup ]
+  SSHIngressSecurityGroup:
+    Fn::GetAtt: [ VPCStack , Outputs.SSHIngressSecurityGroup]
+  PublicSubnet1:
+    Fn::GetAtt: [VPCStack, Outputs.PublicSubnet1]
 
 Resources:
   MyENI:
