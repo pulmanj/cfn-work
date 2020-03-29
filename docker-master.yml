@@ -52,7 +52,6 @@ Resources:
       TimeoutInMinutes: 1
       Parameters:
         EnvironmentName: !Ref EnvironmentName
-        PublicSubnet1CIDR: !Ref PublicSubnet1CIDR
         DockerSecurityGroup:
           Fn::GetAtt: [VPCStack, Outputs.DockerSecurityGroup]
         SSHIngressSecurityGroup:
