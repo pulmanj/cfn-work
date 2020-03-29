@@ -3,7 +3,7 @@ AWSTemplateFormatVersion: "2010-09-09"
 
 Parameters:
   EnvironmentName:
-    Description: Environment Name for tags
+    Description: Environment Name for tagging
     Type: String
   DockerSecurityGroup:
     Type: String
@@ -13,7 +13,7 @@ Parameters:
     Type: String
 
 Resources:
-  MyENI:
+  MgrENI:
     Type: AWS::EC2::NetworkInterface
     Properties: 
       Description: "Used to define static private ip for master node"
@@ -26,3 +26,8 @@ Resources:
         -
           Key: Name
           Value: !Sub ${EnvironmentName}-MasterNodeENI
+
+Outputs:
+  MgrENI:
+    Description: Static IP for Docker Mgr Node
+    Value: !Ref MgrENI

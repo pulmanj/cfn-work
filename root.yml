@@ -45,7 +45,7 @@ Resources:
         PrivateSubnet1CIDR: !Ref PrivateSubnet1CIDR
         PrivateSubnet2CIDR: !Ref PrivateSubnet2CIDR
 
-  MasterENI:
+  MgrENI:
     Type: AWS::CloudFormation::Stack
     Properties: 
       TemplateURL: https://s3-eu-west-2.amazonaws.com/cfn-demo-ianp/Master-ENI.yml
@@ -58,6 +58,17 @@ Resources:
           Fn::GetAtt: [VPCStack, Outputs.SSHIngressSecurityGroup]
         PublicSubnet1:
           Fn::GetAtt: [VPCStack, Outputs.PublicSubnet1]
+
+  DockerMgr:
+    Type: AWS::CloudFormation::Stack
+    Properties: 
+      TemplateURL: https://s3-eu-west-2.amazonaws.com/cfn-demo-ianp/EC2-DockerMgr.yml
+      TimeoutInMinutes: 5
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        MgrENI:
+          Fn::GetAtt: [MgrENI, Outputs.MgrENI]      
+
 
     
 
