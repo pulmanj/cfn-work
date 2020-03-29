@@ -68,9 +68,3 @@ Resources:
         EnvironmentName: !Ref EnvironmentName
         MgrENI:
           Fn::GetAtt: [MgrENI, Outputs.MgrENI]      
-
-
-    
-
-
-
