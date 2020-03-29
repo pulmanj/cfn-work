@@ -1,4 +1,4 @@
-# Create standalone ENI
+# Create ENI to provide static IP to master node
 AWSTemplateFormatVersion: "2010-09-09"
 
 Parameters:
@@ -16,7 +16,7 @@ Resources:
   MyENI:
     Type: AWS::EC2::NetworkInterface
     Properties: 
-      Description: "Use to define static private ip for master node"
+      Description: "Used to define static private ip for master node"
       GroupSet: 
         - !Ref DockerSecurityGroup
         - !Ref SSHIngressSecurityGroup

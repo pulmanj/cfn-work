@@ -99,12 +99,18 @@ Resources:
     DependsOn: InternetGatewayAttachment
     Properties:
       Domain: vpc
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvironmentName}-NATGW1-EIP
 
   NatGateway2EIP:
     Type: AWS::EC2::EIP
     DependsOn: InternetGatewayAttachment
     Properties:
       Domain: vpc
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvironmentName}-NATGW2-EIP
 
   NatGateway1:
     Type: AWS::EC2::NatGateway
@@ -113,7 +119,7 @@ Resources:
       SubnetId: !Ref PublicSubnet1
       Tags:
        - Key: Name
-         Value: !Ref EnvironmentName     
+         Value: !Sub ${EnvironmentName}-NATGW1
 
   NatGateway2:
     Type: AWS::EC2::NatGateway
@@ -122,7 +128,7 @@ Resources:
       SubnetId: !Ref PublicSubnet2
       Tags:
         - Key: Name
-          Value: !Ref EnvironmentName
+          Value: !Ref !Sub ${EnvironmentName}-NATGW2
 
   PublicRouteTable:
     Type: AWS::EC2::RouteTable
