@@ -6,11 +6,11 @@ Parameters:
     Description: Environment Name for tags
     Type: String
   DockerSecurityGroup:
-    Fn::GetAtt: [ VPCStack , Outputs.DockerSecurityGroup ]
+    Type: String
   SSHIngressSecurityGroup:
-    Fn::GetAtt: [ VPCStack , Outputs.SSHIngressSecurityGroup]
+    Type: String
   PublicSubnet1:
-    Fn::GetAtt: [VPCStack, Outputs.PublicSubnet1]
+    Type: String
 
 Resources:
   MyENI:
