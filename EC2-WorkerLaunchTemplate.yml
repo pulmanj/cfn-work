@@ -3,7 +3,7 @@ Description: "Docker Worker Node Launch Template"
 
 Parameters:
   EnvironmentName:
-    Description: Environment Name for tags from root
+    Description: Environment name for tags from root
     Type: String
   DockerSecurityGroup:
     Description: "Security Group to allow Docker Ports from VPCStack"
