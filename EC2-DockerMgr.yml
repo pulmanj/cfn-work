@@ -87,6 +87,7 @@ Resources:
           Value: !Sub ${EnvironmentName}-TempSSMRole
   
   MyProfile:
+    DependsOn: MgrRole
     Type: AWS::IAM::InstanceProfile
     Properties: 
       InstanceProfileName: Access-SSM-Params-Profile
