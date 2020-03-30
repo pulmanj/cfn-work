@@ -20,6 +20,8 @@ Resources:
       Tier: Standard
       Type: String
       Value: "Temp value because null not accepted"
+      Tags:
+        Name: !Sub ${EnvironmentName}-SwarmJoinCmd
 
   MyEC2Instance:
     Type: AWS::EC2::Instance
