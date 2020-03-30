@@ -11,7 +11,6 @@ Parameters:
     Description: Environment Name for tags
     Type: String
 
-
 Resources:
   ClusterJoinCmd:
     Type: AWS::SSM::Parameter
@@ -21,10 +20,6 @@ Resources:
       Tier: Standard
       Type: String
       Value: "Temp value because null not accepted"
-      Tags:
-        -
-          Key: Name
-          Value: !Sub ${EnvironmentName}-SwarmJoinCmd
 
   MyEC2Instance:
     Type: AWS::EC2::Instance
