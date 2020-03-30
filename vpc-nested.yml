@@ -326,3 +326,7 @@ Outputs:
   SSHIngressSecurityGroup:
     Description: "Security Group to allow SSH Ingress"
     Value: !Ref SSHIngressSecurityGroup
+
+  WebIngressSecurityGroup:
+    Description: "Security Group for some web ports"
+    Value: !Ref  WebIngressSecurityGroup

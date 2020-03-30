@@ -1,6 +1,5 @@
 # This will create a Docker Manager Node
 AWSTemplateFormatVersion: "2010-09-09"
-
 Description: "Docker Manager Node"
 
 Parameters:

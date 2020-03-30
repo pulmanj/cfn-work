@@ -1,0 +1,56 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Docker Worker Node Launch Template"
+
+Parameters:
+  EnvironmentName:
+    Description: Environment Name for tags from root
+    Type: String
+  DockerSecurityGroup:
+    Description: "Security Group to allow Docker Ports from VPCStack"
+    Type: String
+  SSHIngressSecurityGroup:
+    Description: "Security Group to allow SSH Ingress from VPCStack"
+    Type: String
+  WebIngressSecurityGroup:
+    Description: "Security Group for some web ports from VPCStack"
+    Type: String
+
+Resources:
+  WorkerNodeLaunchTemplate:
+    Type: AWS::EC2::LaunchTemplate
+    Properties: 
+      LaunchTemplateData: 
+        CapacityReservationSpecification: 
+          CapacityReservationPreference: none
+        CreditSpecification: 
+          CPUCredits: standard
+        IamInstanceProfile: Access-SSM-Params-Profile-Worker  # Created by Mgr Node script
+        ImageId: ami-0389b2a3c4948b1a0
+        InstanceType: t3a.nano
+        KeyName: automation
+        SecurityGroups: 
+          - !Ref SSHIngressSecurityGroup
+          - !Ref WebIngressSecurityGroup
+          - !Ref DockerSecurityGroup
+        TagSpecifications:
+          -
+            ResourceType: instance
+            Tags:
+              - 
+                Key: Name
+                Value: !Sub ${EnvironmentName}-WorkerNode
+          -
+            ResourceType: volume
+            Tags:
+              -
+                Key: Name
+                Value: !Sub ${EnvironmentName}-WorkerNode
+        UserData:
+          Fn::Base64:
+            !Sub |
+              #!/bin/bash -xe
+              yum install -y docker jq;
+              systemctl start docker;
+              usermod -aG docker ec2-user;
+              $(aws ssm get-parameter --name /ClusterJoinCmd --region eu-west-2 | jq -r '.Parameter.Value');      
+      LaunchTemplateName: !Sub ${EnvironmentName}-WorkerTemplate

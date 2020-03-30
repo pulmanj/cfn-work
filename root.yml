@@ -64,4 +64,17 @@ Resources:
       Parameters:
         EnvironmentName: !Ref EnvironmentName
         MgrENI:
-          Fn::GetAtt: [MgrENI, Outputs.MgrENI]      
+          Fn::GetAtt: [MgrENI, Outputs.MgrENI]
+
+  LaunchTemplate:
+    Type: AWS::EC2::LaunchTemplate
+    Properties:
+      TemplateURL: https://s3-eu-west-2.amazonaws.com/cfn-demo-ianp/EC2-WorkerLaunchTemplate.yml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        DockerSecurityGroup:
+          Fn::GetAtt: [VPCStack, Outputs.DockerSecurityGroup]
+        SSHIngressSecurityGroup:
+          Fn::GetAtt: [VPCStack, Outputs.SSHIngressSecurityGroup]
+        WebIngressSecurityGroup:
+          Fn::GetAtt: [VPCStack, Outputs.WebIngressSecurityGroup] 
