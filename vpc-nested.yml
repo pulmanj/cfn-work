@@ -332,13 +332,10 @@ Outputs:
     Value: !Ref  WebIngressSecurityGroup
 
   DockerSecurityGroupId:
-    Description: "Security Group to allow Docker Ports"
-    Value: Fn::GetAtt: ["DockerSecurityGroup", "GroupId"]
+    Value: !GetAtt: DockerSecurityGroup.GroupId
 
   SSHIngressSecurityGroupId:
-    Description: "Security Group to allow SSH Ingress"
-    Value: Fn::GetAtt: ["SSHIngressSecurityGroup", "GroupId"]
+    Value: !GetAtt: SSHIngressSecurityGroup.GroupId
 
   WebIngressSecurityGroupId:
-    Description: "Security Group for some web ports"
-    Value: Fn::GetAtt: ["WebIngressSecurityGroup", "GroupId"]
+    Value: !GetAtt: WebIngressSecurityGroup.GroupId
