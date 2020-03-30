@@ -36,7 +36,6 @@ Resources:
     Type: AWS::CloudFormation::Stack
     Properties :
       TemplateURL: https://s3-eu-west-2.amazonaws.com/cfn-demo-ianp/vpc-nested.yml
-      TimeoutInMinutes: 5
       Parameters:
         EnvironmentName: !Ref EnvironmentName
         VpcCIDR: !Ref VpcCIDR
@@ -49,7 +48,6 @@ Resources:
     Type: AWS::CloudFormation::Stack
     Properties: 
       TemplateURL: https://s3-eu-west-2.amazonaws.com/cfn-demo-ianp/Master-ENI.yml
-      TimeoutInMinutes: 1
       Parameters:
         EnvironmentName: !Ref EnvironmentName
         DockerSecurityGroup:
@@ -63,7 +61,6 @@ Resources:
     Type: AWS::CloudFormation::Stack
     Properties: 
       TemplateURL: https://s3-eu-west-2.amazonaws.com/cfn-demo-ianp/EC2-DockerMgr.yml
-      TimeoutInMinutes: 5
       Parameters:
         EnvironmentName: !Ref EnvironmentName
         MgrENI:
