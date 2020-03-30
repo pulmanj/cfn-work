@@ -20,14 +20,13 @@ Resources:
       Name: ClusterJoinCmd
       Tier: Standard
       Type: String
-      Value: "Temp value as null not accepted"
+      Value: "Temp value because null not accepted"
       Tags:
         -
           Key: Name
           Value: !Sub ${EnvironmentName}-SwarmJoinCmd
 
   MyEC2Instance:
-    DependsOn: MyProfile
     Type: AWS::EC2::Instance
     Properties:
       NetworkInterfaces:
@@ -91,7 +90,6 @@ Resources:
           Value: !Sub ${EnvironmentName}-TempSSMRole
   
   MyProfile:
-    DependsOn: MgrRole
     Type: AWS::IAM::InstanceProfile
     Properties: 
       InstanceProfileName: Access-SSM-Params-Profile
