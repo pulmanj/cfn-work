@@ -1,0 +1,94 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Docker Worker Node Launch Template"
+
+Parameters:
+  EnvironmentName:
+    Description: Environment name for tags from root
+    Type: String
+  # DockerSecurityGroup:
+  #   Type: String
+  # SSHIngressSecurityGroup:
+  #   Type: String
+  # WebIngressSecurityGroup:
+  #   Type: String
+
+Resources:
+  WorkerNodeLaunchTemplate:
+    Type: AWS::EC2::LaunchTemplate
+    Properties: 
+      LaunchTemplateData: 
+        CapacityReservationSpecification: 
+          CapacityReservationPreference: none
+        CreditSpecification: 
+          CpuCredits: standard
+        IamInstanceProfile:
+          Name: !Ref WorkerProfile
+        ImageId: ami-0389b2a3c4948b1a0
+        InstanceType: t3a.nano
+        KeyName: automation
+        # SecurityGroups: 
+        #   - !Ref SSHIngressSecurityGroup
+        #   - !Ref WebIngressSecurityGroup
+        #   - !Ref DockerSecurityGroup
+        TagSpecifications:
+          -
+            ResourceType: instance
+            Tags:
+              - 
+                Key: Name
+                Value: !Sub ${EnvironmentName}-WorkerNode
+          -
+            ResourceType: volume
+            Tags:
+              -
+                Key: Name
+                Value: !Sub ${EnvironmentName}-WorkerNode
+        UserData:
+          Fn::Base64:
+            !Sub |
+              #!/bin/bash -xe
+              yum install -y docker jq;
+              systemctl start docker;
+              usermod -aG docker ec2-user;
+              $(aws ssm get-parameter --name /ClusterJoinCmd --region eu-west-2 | jq -r '.Parameter.Value');      
+      LaunchTemplateName: !Sub ${EnvironmentName}-WorkerTemplate
+
+  WorkerRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: EC2-SSM-Params-Worker-Role
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+              - ec2.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Description: Role for EC2 to read SSM Parameters via CLI
+      MaxSessionDuration: 3600 # Role active for 1 hour
+      Path: /
+      Policies: 
+        - PolicyName: EC2-SSM-Params-WorkerAccess
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ssm:GetParameters
+                  - ssm:GetParameter
+                Resource: arn:aws:ssm:*:*:parameter/*
+      Tags: 
+        -
+          Key: Name
+          Value: !Sub ${EnvironmentName}-TempSSMRole
+  
+  WorkerProfile:
+    DependsOn: WorkerRole
+    Type: AWS::IAM::InstanceProfile
+    Properties: 
+      InstanceProfileName: Read-SSM-Params-Profile
+      Path: /
+      Roles: 
+        - EC2-SSM-Params-Worker-Role
