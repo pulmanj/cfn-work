@@ -74,8 +74,8 @@ Resources:
       Parameters:
         EnvironmentName: !Ref EnvironmentName
         DockerSecurityGroup:
-          Fn::GetAtt: [VPCStack, Outputs.DockerSecurityGroup]
+          Fn::GetAtt: [VPCStack, Outputs.DockerSecurityGroupId]
         SSHIngressSecurityGroup:
-          Fn::GetAtt: [VPCStack, Outputs.SSHIngressSecurityGroup]
+          Fn::GetAtt: [VPCStack, Outputs.SSHIngressSecurityGroupId]
         WebIngressSecurityGroup:
-          Fn::GetAtt: [VPCStack, Outputs.WebIngressSecurityGroup]
+          Fn::GetAtt: [VPCStack, Outputs.WebIngressSecurityGroupId]
