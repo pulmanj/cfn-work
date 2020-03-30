@@ -332,10 +332,10 @@ Outputs:
     Value: !Ref  WebIngressSecurityGroup
 
   DockerSecurityGroupId:
-    Value: !GetAtt: DockerSecurityGroup.GroupId
+    Value: !GetAtt DockerSecurityGroup.GroupId
 
   SSHIngressSecurityGroupId:
-    Value: !GetAtt: SSHIngressSecurityGroup.GroupId
+    Value: !GetAtt SSHIngressSecurityGroup.GroupId
 
   WebIngressSecurityGroupId:
-    Value: !GetAtt: WebIngressSecurityGroup.GroupId
+    Value: !GetAtt WebIngressSecurityGroup.GroupId
