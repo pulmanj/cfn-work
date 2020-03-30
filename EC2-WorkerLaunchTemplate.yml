@@ -6,13 +6,10 @@ Parameters:
     Description: Environment name for tags from root
     Type: String
   DockerSecurityGroup:
-    Description: "Security Group to allow Docker Ports from VPCStack"
     Type: String
   SSHIngressSecurityGroup:
-    Description: "Security Group to allow SSH Ingress from VPCStack"
     Type: String
   WebIngressSecurityGroup:
-    Description: "Security Group for some web ports from VPCStack"
     Type: String
 
 Resources:

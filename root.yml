@@ -66,8 +66,7 @@ Resources:
   #       MgrENI:
   #         Fn::GetAtt: [MgrENI, Outputs.MgrENI]
 
-  LaunchTemplate:
-  DependsOn: VPCStack
+  WorkerLaunchTemplate:
     Type: AWS::EC2::LaunchTemplate
     Properties:
       TemplateURL: https://s3-eu-west-2.amazonaws.com/cfn-demo-ianp/EC2-WorkerLaunchTemplate.yml
@@ -77,5 +76,5 @@ Resources:
           Fn::GetAtt: [VPCStack, Outputs.DockerSecurityGroup]
         SSHIngressSecurityGroup:
           Fn::GetAtt: [VPCStack, Outputs.SSHIngressSecurityGroup]
-        WebIngressSecurityGroup:
-          Fn::GetAtt: [VPCStack, Outputs.WebIngressSecurityGroup] 
+        PublicSubnet1:
+          Fn::GetAtt: [VPCStack, Outputs.PublicSubnet1]
