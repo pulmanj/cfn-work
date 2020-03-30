@@ -73,9 +73,9 @@ Resources:
       TemplateURL: https://s3-eu-west-2.amazonaws.com/cfn-demo-ianp/EC2-WorkerLaunchTemplate.yml
       Parameters:
         EnvironmentName: !Ref EnvironmentName
-        DockerSecurityGroupId:
-          Fn::GetAtt: [VPCStack, Outputs.DockerSecurityGroupId]
-        SSHIngressSecurityGroupId:
-          Fn::GetAtt: [VPCStack, Outputs.SSHIngressSecurityGroupId]
-        WebIngressSecurityGroupId:
-          Fn::GetAtt: [VPCStack, Outputs.WebIngressSecurityGroupId]
+        DockerSecurityGroup:
+          Fn::GetAtt: [VPCStack, Outputs.DockerSecurityGroup]
+        SSHIngressSecurityGroup:
+          Fn::GetAtt: [VPCStack, Outputs.SSHIngressSecurityGroup]
+        WebIngressSecurityGroup:
+          Fn::GetAtt: [VPCStack, Outputs.WebIngressSecurityGroup]

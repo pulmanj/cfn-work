@@ -330,12 +330,3 @@ Outputs:
   WebIngressSecurityGroup:
     Description: "Security Group for some web ports"
     Value: !Ref  WebIngressSecurityGroup
-
-  DockerSecurityGroupId:
-    Value: !GetAtt DockerSecurityGroup.GroupId
-
-  SSHIngressSecurityGroupId:
-    Value: !GetAtt SSHIngressSecurityGroup.GroupId
-
-  WebIngressSecurityGroupId:
-    Value: !GetAtt WebIngressSecurityGroup.GroupId

@@ -5,11 +5,11 @@ Parameters:
   EnvironmentName:
     Description: Environment name for tags from root
     Type: String
-  DockerSecurityGroupId:
+  DockerSecurityGroup:
     Type: String
-  SSHIngressSecurityGroupId:
+  SSHIngressSecurityGroup:
     Type: String
-  WebIngressSecurityGroupId:
+  WebIngressSecurityGroup:
     Type: String
 
 Resources:
@@ -27,9 +27,9 @@ Resources:
         InstanceType: t3a.nano
         KeyName: automation
         SecurityGroupIds: 
-          - !Ref SSHIngressSecurityGroupId
-          - !Ref WebIngressSecurityGroupId
-          - !Ref DockerSecurityGroupId
+          - !Ref SSHIngressSecurityGroup
+          - !Ref WebIngressSecurityGroup
+          - !Ref DockerSecurityGroup
         TagSpecifications:
           -
             ResourceType: instance
