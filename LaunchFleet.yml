@@ -5,22 +5,23 @@ Parameters:
   EnvironmentName:
     Description: Environment name for tags from root
     Type: String
+  WorkerNodeLaunchTemplateId:
+    Description: A reference to the created Launch Template
+    Type: String
+  NumberOfWorkerNodes:
+    Description: Number of worker nodes requested
+    Type: Integer
 
 Resources:
   Type: AWS::EC2::EC2Fleet
   Properties: 
     ExcessCapacityTerminationPolicy: termination
     LaunchTemplateConfigs: 
-      - LaunchTemplateSpecification: !Sub ${EnvironmentName}-WorkerNodeTemplate
-    OnDemandOptions: 
-      OnDemandOptionsRequest
-    ReplaceUnhealthyInstances: Boolean
-    SpotOptions: 
-      SpotOptionsRequest
-    TagSpecifications: 
-      - TagSpecification
-    TargetCapacitySpecification: 
-      TargetCapacitySpecificationRequest
+      - LaunchTemplateSpecification: !Ref WorkerNodeLaunchTemplateId
+    ReplaceUnhealthyInstances: true
+    TargetCapacitySpecification:
+      DefaultTargetCapacityType: on-demand
+      TotalTargetCapacity: Integer 
     TerminateInstancesWithExpiration: Boolean
     Type: String
     ValidFrom: String
