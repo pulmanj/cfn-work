@@ -10,7 +10,7 @@ Parameters:
     Type: String
   NumberOfWorkerNodes:
     Description: Number of worker nodes requested
-    Type: Integer
+    Type: Number
 
 Resources:
   Type: AWS::EC2::EC2Fleet
