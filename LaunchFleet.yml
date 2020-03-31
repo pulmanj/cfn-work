@@ -5,7 +5,7 @@ Parameters:
   EnvironmentName:
     Description: Environment name for tags from root
     Type: String
-  WorkerLaunchTemplate:
+  WorkerNodeLaunchTemplate:
     Description: A reference to the created Launch Template
     Type: String
   NumberOfWorkerNodes:
@@ -17,7 +17,7 @@ Resources:
   Properties: 
     ExcessCapacityTerminationPolicy: termination
     LaunchTemplateConfigs: 
-      - LaunchTemplateSpecification: !Ref WorkerLaunchTemplate
+      - LaunchTemplateSpecification: !Ref WorkerNodeLaunchTemplate
     ReplaceUnhealthyInstances: true
     TargetCapacitySpecification:
       DefaultTargetCapacityType: on-demand

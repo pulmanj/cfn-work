@@ -95,4 +95,5 @@ Resources:
       Parameters:
         EnvironmentName: !Ref EnvironmentName
         NumberOfWorkerNodes: !Ref NumberOfWorkerNodes
-        WorkerLaunchTemplate: Fn::GetAtt: [WorkerLaunchTemplate, Outputs.WorkerLaunchTemplate]
+        WorkerLaunchTemplate: 
+          Fn::GetAtt: [WorkerNodeLaunchTemplate, Outputs.WorkerNodeLaunchTemplate]
