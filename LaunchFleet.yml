@@ -13,14 +13,15 @@ Parameters:
     Type: Number
 
 Resources:
-  Type: AWS::EC2::EC2Fleet
-  Properties: 
-    ExcessCapacityTerminationPolicy: termination
-    LaunchTemplateConfigs: 
-    - LaunchTemplateSpecification: 
-        LaunchTemplateId: !Ref WorkerNodeLaunchTemplate
-        Version: 1
-    ReplaceUnhealthyInstances: true
-    TargetCapacitySpecification:
-      DefaultTargetCapacityType: on-demand
-      TotalTargetCapacity: !Ref NumberOfWorkerNodes
+  LaunchFleet:
+    Type: AWS::EC2::EC2Fleet
+    Properties: 
+      ExcessCapacityTerminationPolicy: termination
+      LaunchTemplateConfigs: 
+      - LaunchTemplateSpecification: 
+          LaunchTemplateId: !Ref WorkerNodeLaunchTemplate
+          Version: 1
+      ReplaceUnhealthyInstances: true
+      TargetCapacitySpecification:
+        DefaultTargetCapacityType: on-demand
+        TotalTargetCapacity: !Ref NumberOfWorkerNodes
