@@ -17,7 +17,7 @@ Resources:
   Properties: 
     ExcessCapacityTerminationPolicy: termination
     LaunchTemplateConfigs: 
-      LaunchTemplateSpecification: 
+    - LaunchTemplateSpecification: 
         LaunchTemplateId: !Ref WorkerNodeLaunchTemplate
         Version: 1
     ReplaceUnhealthyInstances: true
