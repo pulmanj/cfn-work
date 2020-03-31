@@ -22,8 +22,4 @@ Resources:
     ReplaceUnhealthyInstances: true
     TargetCapacitySpecification:
       DefaultTargetCapacityType: on-demand
-      TotalTargetCapacity: !Ref NumberOfWorkerNodes 
-    TerminateInstancesWithExpiration: Boolean
-    Type: String
-    ValidFrom: String
-    ValidUntil: String
+      TotalTargetCapacity: !Ref NumberOfWorkerNodes
