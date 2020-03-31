@@ -31,10 +31,6 @@ Resources:
           - !Ref SSHIngressSecurityGroup
           - !Ref WebIngressSecurityGroup
           - !Ref DockerSecurityGroup
-        Tags:
-          -
-            Key: Name
-            Value: !Sub ${EnvironmentName}-WorkerNodeTemplate
         TagSpecifications:
           -
             ResourceType: instance
