@@ -13,9 +13,9 @@ Parameters:
     Type: String
 
 Outputs:
-  WorkerNodeLaunchTemplateId:
+  WorkerLaunchTemplate:
     Description: A reference to the created Launch Template
-    Value: !Ref WorkerNodeLaunchTemplate
+    Value: !Ref WorkerLaunchTemplate
 
 Resources:
   WorkerNodeLaunchTemplate:
