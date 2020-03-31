@@ -17,11 +17,12 @@ Resources:
   Properties: 
     ExcessCapacityTerminationPolicy: termination
     LaunchTemplateConfigs: 
-      - LaunchTemplateSpecification: !Ref WorkerNodeLaunchTemplate
+      LaunchTemplateSpecification: 
+        LaunchTemplateId: !Ref WorkerNodeLaunchTemplate
     ReplaceUnhealthyInstances: true
     TargetCapacitySpecification:
       DefaultTargetCapacityType: on-demand
-      TotalTargetCapacity: Integer 
+      TotalTargetCapacity: !Ref NumberOfWorkerNodes 
     TerminateInstancesWithExpiration: Boolean
     Type: String
     ValidFrom: String
