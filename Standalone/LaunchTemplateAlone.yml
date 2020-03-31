@@ -16,6 +16,7 @@ Resources:
   WorkerNodeLaunchTemplate:
     Type: AWS::EC2::LaunchTemplate
     Properties: 
+      LaunchTemplateName: !Sub ${EnvironmentName}-WorkerNodeTemplate
       LaunchTemplateData: 
         CapacityReservationSpecification: 
           CapacityReservationPreference: none
@@ -26,7 +27,7 @@ Resources:
         ImageId: ami-0389b2a3c4948b1a0
         InstanceType: t3a.nano
         KeyName: automation
-        # SecurityGroups: 
+        # SecurityGroupIds: 
         #   - !Ref SSHIngressSecurityGroup
         #   - !Ref WebIngressSecurityGroup
         #   - !Ref DockerSecurityGroup
