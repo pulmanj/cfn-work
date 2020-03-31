@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Docker Worker Node Launch Template"
+
+Parameters:
+  EnvironmentName:
+    Description: Environment name for tags from root
+    Type: String
+
+Resources:
+  Type: AWS::EC2::EC2Fleet
+  Properties: 
+    ExcessCapacityTerminationPolicy: termination
+    LaunchTemplateConfigs: 
+      - LaunchTemplateSpecification: !Sub ${EnvironmentName}-WorkerNodeTemplate
+    OnDemandOptions: 
+      OnDemandOptionsRequest
+    ReplaceUnhealthyInstances: Boolean
+    SpotOptions: 
+      SpotOptionsRequest
+    TagSpecifications: 
+      - TagSpecification
+    TargetCapacitySpecification: 
+      TargetCapacitySpecificationRequest
+    TerminateInstancesWithExpiration: Boolean
+    Type: String
+    ValidFrom: String
+    ValidUntil: String

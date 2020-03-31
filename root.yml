@@ -80,3 +80,10 @@ Resources:
           Fn::GetAtt: [VPCStack, Outputs.SSHIngressSecurityGroup]
         WebIngressSecurityGroup:
           Fn::GetAtt: [VPCStack, Outputs.WebIngressSecurityGroup]
+
+  LaunchFleet:
+    DependsOn: WorkerLaunchTemplate
+    Properties:
+      TemplateURL: https://s3-eu-west-2.amazonaws.com/cfn-demo-ianp/LaunchFleet.yml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName

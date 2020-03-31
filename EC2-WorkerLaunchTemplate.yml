@@ -12,6 +12,11 @@ Parameters:
   WebIngressSecurityGroup:
     Type: String
 
+Outputs:
+  WorkerNodeLaunchTemplateId:
+    Description: A reference to the created Launch Template
+    Value: !Ref WorkerNodeLaunchTemplate
+
 Resources:
   WorkerNodeLaunchTemplate:
     Type: AWS::EC2::LaunchTemplate
