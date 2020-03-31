@@ -9,8 +9,9 @@ Parameters:
 
   NumberOfWorkerNodes:
     Description: Number of worker nodes requested
-    Type: Integer
-    Default: 2  
+    Type: Number
+    Default: 2
+    MaxValue: 10
 
   VpcCIDR:
     Description: "** DO NOT CHANGE - USED AS CONSTANT **"
@@ -88,6 +89,7 @@ Resources:
 
   LaunchFleet:
     DependsOn: WorkerLaunchTemplate
+    Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: https://s3-eu-west-2.amazonaws.com/cfn-demo-ianp/LaunchFleet.yml
       Parameters:
