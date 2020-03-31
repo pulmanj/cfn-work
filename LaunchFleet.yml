@@ -19,6 +19,8 @@ Resources:
     LaunchTemplateConfigs: 
       LaunchTemplateSpecification: 
         LaunchTemplateId: !Ref WorkerNodeLaunchTemplate
+        LaunchTemplateName: !Ref WorkerNodeLaunchTemplate
+        Version: 1
     ReplaceUnhealthyInstances: true
     TargetCapacitySpecification:
       DefaultTargetCapacityType: on-demand
