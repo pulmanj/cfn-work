@@ -7,27 +7,27 @@ Parameters:
     Default: Demo
 
   VpcCIDR:
-    Description: Please enter the IP range (CIDR notation) for this VPC
+    Description: "** DO NOT CHANGE - USED AS CONSTANT **"
     Type: String
     Default: 10.192.0.0/16
 
   PublicSubnet1CIDR:
-    Description: Please enter the IP range (CIDR notation) for the public subnet in the first Availability Zone
+    Description: "** DO NOT CHANGE - USED AS CONSTANT **"
     Type: String
     Default: 10.192.10.0/24
 
   PublicSubnet2CIDR:
-    Description: Please enter the IP range (CIDR notation) for the public subnet in the second Availability Zone
+    Description: "** DO NOT CHANGE - USED AS CONSTANT **"
     Type: String
     Default: 10.192.11.0/24
 
   PrivateSubnet1CIDR:
-    Description: Please enter the IP range (CIDR notation) for the private subnet in the first Availability Zone
+    Description: "** DO NOT CHANGE - USED AS CONSTANT **"
     Type: String
     Default: 10.192.20.0/24
 
   PrivateSubnet2CIDR:
-    Description: Please enter the IP range (CIDR notation) for the private subnet in the second Availability Zone
+    Description: "** DO NOT CHANGE - USED AS CONSTANT **"
     Type: String
     Default: 10.192.21.0/24
 
@@ -68,7 +68,7 @@ Resources:
 
   WorkerLaunchTemplate:
     DependsOn: VPCStack
-    Type: AWS::EC2::LaunchTemplate
+    Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: https://s3-eu-west-2.amazonaws.com/cfn-demo-ianp/EC2-WorkerLaunchTemplate.yml
       Parameters:
