@@ -22,13 +22,6 @@ Resources:
     Properties: 
       LaunchTemplateName: !Sub ${EnvironmentName}-WorkerNodeTemplate
       LaunchTemplateData:
-        NetworkInterfaces:
-          -
-            Groups: [!Ref SSHIngressSecurityGroup, !Ref WebIngressSecurityGroup, !Ref DockerSecurityGroup]
-            SubnetId: PublicSubnet1
-          -
-            Groups: [!Ref SSHIngressSecurityGroup, !Ref WebIngressSecurityGroup, !Ref DockerSecurityGroup]
-            SubnetId: PublicSubnet2            
         CapacityReservationSpecification: 
           CapacityReservationPreference: none
         CreditSpecification: 
