@@ -3,13 +3,10 @@ Description: "Docker Worker Node Launch Template"
 
 Parameters:
   EnvironmentName:
-    Description: Environment name for tags from root
     Type: String
   WorkerNodeLaunchTemplate:
-    Description: A reference to the created Launch Template
     Type: String
   NumberOfWorkerNodes:
-    Description: Number of worker nodes requested
     Type: Number
   PublicSubnet1:
     Type: String
@@ -24,12 +21,12 @@ Resources:
       LaunchTemplateConfigs: 
       - LaunchTemplateSpecification: 
           LaunchTemplateId: !Ref WorkerNodeLaunchTemplate
-          Version: !GetAtt WorkerNodeLaunchTemplate.LatestVersionNumber
+          Version: 1
         Overrides:
         - SubnetId: !Ref PublicSubnet1
       - LaunchTemplateSpecification: 
           LaunchTemplateId: !Ref WorkerNodeLaunchTemplate
-          Version: !GetAtt WorkerNodeLaunchTemplate.LatestVersionNumber
+          Version: 1
         Overrides:
         - SubnetId: !Ref PublicSubnet2
       ReplaceUnhealthyInstances: true

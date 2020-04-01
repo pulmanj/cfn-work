@@ -12,11 +12,6 @@ Parameters:
   WebIngressSecurityGroup:
     Type: String
 
-Outputs:
-  WorkerNodeLaunchTemplate:
-    Description: A reference to the created Launch Template
-    Value: !Ref WorkerNodeLaunchTemplate
-
 Resources:
   WorkerNodeLaunchTemplate:
     Type: AWS::EC2::LaunchTemplate
@@ -58,6 +53,10 @@ Resources:
               usermod -aG docker ec2-user;
               $(aws ssm get-parameter --name /ClusterJoinCmd --region eu-west-2 | jq -r '.Parameter.Value');      
       LaunchTemplateName: !Sub ${EnvironmentName}-WorkerTemplate
+    Outputs:
+      WorkerNodeLaunchTemplate:
+        Description: A reference to the created Launch Template
+        Value: !Ref WorkerNodeLaunchTemplate
 
   WorkerRole:
     Type: AWS::IAM::Role
