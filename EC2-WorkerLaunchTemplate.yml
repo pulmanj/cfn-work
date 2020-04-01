@@ -20,7 +20,7 @@ Resources:
   WorkerNodeLaunchTemplate:
     Type: AWS::EC2::LaunchTemplate
     Properties: 
-      LaunchTemplateName: !Sub ${EnvironmentName}-WorkerNodeTemplate
+      LaunchTemplateName: WorkerNodeLaunchTemplate
       LaunchTemplateData:
         CapacityReservationSpecification: 
           CapacityReservationPreference: none
