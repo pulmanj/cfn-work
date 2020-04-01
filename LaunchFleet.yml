@@ -24,7 +24,7 @@ Resources:
             LaunchTemplateId: !Ref WorkerNodeLaunchTemplate
             Version: 1
             Overrides:
-              SubnetId: !Ref PublicSubnet1, !Ref PublicSubnet2
+              SubnetId: !Ref PublicSubnet1
       ReplaceUnhealthyInstances: true
       TargetCapacitySpecification:
         DefaultTargetCapacityType: on-demand
