@@ -11,13 +11,24 @@ Parameters:
     Type: String
   WebIngressSecurityGroup:
     Type: String
+  PublicSubnet1:
+    Type: String
+  PublicSubnet2:
+    Type: String
 
 Resources:
   WorkerNodeLaunchTemplate:
     Type: AWS::EC2::LaunchTemplate
     Properties: 
       LaunchTemplateName: !Sub ${EnvironmentName}-WorkerNodeTemplate
-      LaunchTemplateData: 
+      LaunchTemplateData:
+        NetworkInterfaces:
+          -
+            Groups: [!Ref SSHIngressSecurityGroup, !Ref WebIngressSecurityGroup, !Ref DockerSecurityGroup]
+            SubnetId: PublicSubnet1
+          -
+            Groups: [!Ref SSHIngressSecurityGroup, !Ref WebIngressSecurityGroup, !Ref DockerSecurityGroup]
+            SubnetId: PublicSubnet2            
         CapacityReservationSpecification: 
           CapacityReservationPreference: none
         CreditSpecification: 
