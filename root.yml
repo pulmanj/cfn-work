@@ -97,5 +97,5 @@ Resources:
       Parameters:
         EnvironmentName: !Ref EnvironmentName
         NumberOfWorkerNodes: !Ref NumberOfWorkerNodes
-        WorkerNodeLaunchTemplate: 
-          Fn::GetAtt: [WorkerNodeLaunchTemplate, Outputs.WorkerNodeLaunchTemplate]
+        WorkerNodeLaunchTemplate: Fn::GetAtt: [WorkerNodeLaunchTemplate, Outputs.WorkerNodeLaunchTemplate]
+        PublicSubnet1: Fn::GetAtt: [VPCStack, Outputs.PublicSubnet1]

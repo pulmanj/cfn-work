@@ -8,6 +8,8 @@ Parameters:
     Type: String
   NumberOfWorkerNodes:
     Type: Number
+  PublicSubnet1:
+    Type: String
 
 Resources:
   LaunchFleet:
@@ -18,7 +20,9 @@ Resources:
       - LaunchTemplateSpecification: 
           LaunchTemplateId: !Ref WorkerNodeLaunchTemplate
           Version: 1
+        Overrides: 
+          SubnetId: !Ref PublicSubnet1
       ReplaceUnhealthyInstances: true
       TargetCapacitySpecification:
         DefaultTargetCapacityType: on-demand
-        TotalTargetCapacity: !Ref  NumberOfWorkerNodes
+        TotalTargetCapacity: !Ref  NumberOfWorkerNodes    
