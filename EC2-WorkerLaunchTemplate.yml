@@ -11,6 +11,10 @@ Parameters:
     Type: String
   WebIngressSecurityGroup:
     Type: String
+  PublicSubnet1:
+    Type: String
+  PublicSubnet2:
+    Type: String
 
 Resources:
   WorkerNodeLaunchTemplate:
@@ -18,6 +22,25 @@ Resources:
     Properties: 
       LaunchTemplateName: WorkerNodeLaunchTemplate
       LaunchTemplateData:
+        NetworkInterfaces:
+          -
+            AssociatePublicIpAddress: "true"
+            DeleteOnTermination: "true"
+            DeviceIndex: 0
+            Groups:
+              - !Ref SSHIngressSecurityGroup
+              - !Ref WebIngressSecurityGroup
+              - !Ref DockerSecurityGroup
+            SubnetId: !Ref PublicSubnet1
+          -
+            AssociatePublicIpAddress: "true"
+            DeleteOnTermination: "true"
+            DeviceIndex: 0
+            Groups:
+              - !Ref SSHIngressSecurityGroup
+              - !Ref WebIngressSecurityGroup
+              - !Ref DockerSecurityGroup
+            SubnetId: !Ref PublicSubnet2
         CapacityReservationSpecification: 
           CapacityReservationPreference: none
         CreditSpecification: 
@@ -27,10 +50,6 @@ Resources:
         ImageId: ami-0389b2a3c4948b1a0
         InstanceType: t3a.nano
         KeyName: automation
-        SecurityGroupIds: 
-          - !Ref SSHIngressSecurityGroup
-          - !Ref WebIngressSecurityGroup
-          - !Ref DockerSecurityGroup
         TagSpecifications:
           -
             ResourceType: instance

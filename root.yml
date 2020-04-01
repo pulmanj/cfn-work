@@ -86,6 +86,10 @@ Resources:
           Fn::GetAtt: [VPCStack, Outputs.SSHIngressSecurityGroup]
         WebIngressSecurityGroup:
           Fn::GetAtt: [VPCStack, Outputs.WebIngressSecurityGroup]
+        PublicSubnet1:
+          Fn::GetAtt: [VPCStack, Outputs.PublicSubnet1]
+        PublicSubnet2:
+          Fn::GetAtt: [VPCStack, Outputs.PublicSubnet2]
 
   LaunchFleet:
     DependsOn: WorkerNodeLaunchTemplate
@@ -97,7 +101,3 @@ Resources:
         NumberOfWorkerNodes: !Ref NumberOfWorkerNodes
         WorkerNodeLaunchTemplate: 
           Fn::GetAtt: [WorkerNodeLaunchTemplate, Outputs.WorkerNodeLaunchTemplate]
-        PublicSubnet1:
-          Fn::GetAtt: [VPCStack, Outputs.PublicSubnet1]
-        PublicSubnet2:
-          Fn::GetAtt: [VPCStack, Outputs.PublicSubnet2]
