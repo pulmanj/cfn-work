@@ -6,6 +6,8 @@ Parameters:
     Type: String
   WorkerNodeLaunchTemplate:
     Type: String
+  NumberOfWorkerNodes:
+    Type: Number
 
 Resources:
   LaunchFleet:
@@ -19,4 +21,4 @@ Resources:
       ReplaceUnhealthyInstances: true
       TargetCapacitySpecification:
         DefaultTargetCapacityType: on-demand
-        TotalTargetCapacity: 2
+        TotalTargetCapacity: !Ref  NumberOfWorkerNodes
