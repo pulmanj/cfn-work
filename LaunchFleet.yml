@@ -32,4 +32,6 @@ Resources:
       ReplaceUnhealthyInstances: true
       TargetCapacitySpecification:
         DefaultTargetCapacityType: on-demand
+        OnDemandTargetCapacity: 2
+        SpotTargetCapacity: 0
         TotalTargetCapacity: 2 # !Ref NumberOfWorkerNodes
