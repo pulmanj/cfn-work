@@ -13,8 +13,6 @@ Parameters:
     Type: String
   PublicSubnet1:
     Type: String
-  PublicSubnet2:
-    Type: String
 
 Resources:
   WorkerNodeLaunchTemplate:
@@ -22,6 +20,9 @@ Resources:
     Properties: 
       LaunchTemplateName: WorkerNodeLaunchTemplate
       LaunchTemplateData:
+        Placement:
+          AvailabilityZone: eu-west-2a
+          Tenancy: default
         NetworkInterfaces:
           -
             AssociatePublicIpAddress: "true"
@@ -32,15 +33,6 @@ Resources:
               - !Ref WebIngressSecurityGroup
               - !Ref DockerSecurityGroup
             SubnetId: !Ref PublicSubnet1
-          -
-            AssociatePublicIpAddress: "true"
-            DeleteOnTermination: "true"
-            DeviceIndex: 0
-            Groups:
-              - !Ref SSHIngressSecurityGroup
-              - !Ref WebIngressSecurityGroup
-              - !Ref DockerSecurityGroup
-            SubnetId: !Ref PublicSubnet2
         CapacityReservationSpecification: 
           CapacityReservationPreference: none
         CreditSpecification: 
