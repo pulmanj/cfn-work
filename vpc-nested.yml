@@ -330,3 +330,7 @@ Outputs:
   WebIngressSecurityGroup:
     Description: "Security Group for some web ports"
     Value: !Ref  WebIngressSecurityGroup
+
+  WorkerSecurityGroups:
+    Description: List of SG used during testing
+    Value: !Join [",", [!Ref DockerSecurityGroup, !Ref SSHIngressSecurityGroup, !Ref WebIngressSecurityGroup]]
