@@ -13,6 +13,8 @@ Parameters:
     Type: Number
   PublicSubnet1:
     Type: String
+  PublicSubnet2:
+    Type: String
 
 Resources:
   LaunchFleet:
@@ -22,9 +24,14 @@ Resources:
       LaunchTemplateConfigs: 
       - LaunchTemplateSpecification: 
           LaunchTemplateId: !Ref WorkerNodeLaunchTemplate
-          Version: 1
+          Version: !GetAtt WorkerNodeLaunchTemplate.LatestVersionNumber
         Overrides:
         - SubnetId: !Ref PublicSubnet1
+      - LaunchTemplateSpecification: 
+          LaunchTemplateId: !Ref WorkerNodeLaunchTemplate
+          Version: !GetAtt WorkerNodeLaunchTemplate.LatestVersionNumber
+        Overrides:
+        - SubnetId: !Ref PublicSubnet2
       ReplaceUnhealthyInstances: true
       TargetCapacitySpecification:
         DefaultTargetCapacityType: on-demand
