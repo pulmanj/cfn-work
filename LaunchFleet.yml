@@ -19,12 +19,11 @@ Resources:
     Properties: 
       ExcessCapacityTerminationPolicy: termination
       LaunchTemplateConfigs: 
-      - 
-          LaunchTemplateSpecification: 
-            LaunchTemplateId: !Ref WorkerNodeLaunchTemplate
-            Version: 1
-            Overrides:
-              SubnetId: !Ref PublicSubnet1
+      - LaunchTemplateSpecification: 
+          LaunchTemplateId: !Ref WorkerNodeLaunchTemplate
+          Version: 1
+          Overrides:
+            - SubnetId: !Ref PublicSubnet1
       ReplaceUnhealthyInstances: true
       TargetCapacitySpecification:
         DefaultTargetCapacityType: on-demand
