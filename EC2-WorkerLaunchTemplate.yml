@@ -11,12 +11,6 @@ Parameters:
     Type: String
   WebIngressSecurityGroup:
     Type: String
-  PublicSubnet1:
-    Type: String
-  PublicSubnet2:
-    Type: String
-  WorkerSecurityGroups:
-    Type: String
 
 Resources:
   WorkerNodeLaunchTemplate:
@@ -24,15 +18,6 @@ Resources:
     Properties: 
       LaunchTemplateName: WorkerNodeLaunchTemplate
       LaunchTemplateData:
-        NetworkInterfaces:
-          - 
-            AssociatePublicIpAddress: true
-            SubnetId: !Ref PublicSubnet1
-            Groups: 
-              - 
-                !Ref DockerSecurityGroup
-                !Ref SSHIngressSecurityGroup
-                !Ref WebIngressSecurityGroup
         CapacityReservationSpecification: 
           CapacityReservationPreference: none
         CreditSpecification: 
