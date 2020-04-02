@@ -23,7 +23,8 @@ Resources:
         Placement:
           AvailabilityZone: eu-west-2a
           Tenancy: default
-          SecurityGroupIds: !Ref DockerSecurityGroup
+          SecurityGroupIds: 
+            - !Ref DockerSecurityGroup
         CapacityReservationSpecification: 
           CapacityReservationPreference: none
         CreditSpecification: 
