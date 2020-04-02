@@ -20,9 +20,6 @@ Resources:
     Properties: 
       LaunchTemplateName: WorkerNodeLaunchTemplate
       LaunchTemplateData:
-        Placement:
-          AvailabilityZone: eu-west-2a
-          Tenancy: default
           SecurityGroupIds: 
             - !Ref DockerSecurityGroup
             - !Ref SSHIngressSecurityGroup
