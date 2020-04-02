@@ -11,7 +11,6 @@ Resources:
   LaunchFleet:
     Type: AWS::EC2::EC2Fleet
     Properties:
-      ExcessCapacityTerminationPolicy: termination
       LaunchTemplateConfigs: 
       - LaunchTemplateSpecification: 
           LaunchTemplateId: !Ref WorkerNodeLaunchTemplate
