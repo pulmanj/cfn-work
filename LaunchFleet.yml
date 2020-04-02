@@ -21,5 +21,5 @@ Resources:
       TargetCapacitySpecification:
         DefaultTargetCapacityType: on-demand
         TotalTargetCapacity: !Ref  NumberOfWorkerNodes
-      Type: instant  # This is the only Type that works with on-demand only
+      Type: maintain
     
