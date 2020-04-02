@@ -23,5 +23,4 @@ Resources:
         DefaultTargetCapacityType: on-demand
         TotalTargetCapacity: !Ref  NumberOfWorkerNodes
       Type: request
-      ReplaceUnhealthyInstances: true
     
