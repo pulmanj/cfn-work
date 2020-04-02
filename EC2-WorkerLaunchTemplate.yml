@@ -25,6 +25,8 @@ Resources:
           Tenancy: default
           SecurityGroupIds: 
             - !Ref DockerSecurityGroup
+            - !Ref SSHIngressSecurityGroup
+            - !Ref WebIngressSecurityGroup
         CapacityReservationSpecification: 
           CapacityReservationPreference: none
         CreditSpecification: 
