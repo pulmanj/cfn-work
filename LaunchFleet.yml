@@ -1,3 +1,6 @@
+# Seems to have an issue CFN can't delete fleet despite running
+# with admin role it advises insufficient privilege for "describe-fleet"
+# and "delete-fleet"
 AWSTemplateFormatVersion: "2010-09-09"
 Description: "Docker Worker Node Launch Template"
 
