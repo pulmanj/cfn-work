@@ -1,4 +1,3 @@
-# Creates
 AWSTemplateFormatVersion: "2010-09-09"
 Description: "Docker Worker Node Launch Template"
 
