@@ -19,4 +19,5 @@ Resources:
         DefaultTargetCapacityType: on-demand
         TotalTargetCapacity: !Ref  NumberOfWorkerNodes
       Type: instant
+      ExcessCapacityTerminationPolicy: termination
     
