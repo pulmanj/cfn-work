@@ -10,7 +10,7 @@ Parameters:
 Resources:
   LaunchFleet:
     Type: AWS::EC2::EC2Fleet
-    Properties: 
+    Properties:
       ExcessCapacityTerminationPolicy: termination
       LaunchTemplateConfigs: 
       - LaunchTemplateSpecification: 
@@ -18,4 +18,5 @@ Resources:
           Version: 1
       TargetCapacitySpecification:
         DefaultTargetCapacityType: on-demand
-        TotalTargetCapacity: 1 #!Ref  NumberOfWorkerNodes    
+        TotalTargetCapacity: 1 #!Ref  NumberOfWorkerNodes
+      Type: instant    
