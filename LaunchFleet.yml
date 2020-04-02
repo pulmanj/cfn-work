@@ -18,4 +18,4 @@ Resources:
           Version: 1
       TargetCapacitySpecification:
         DefaultTargetCapacityType: on-demand
-        TotalTargetCapacity: !Ref  NumberOfWorkerNodes    
+        TotalTargetCapacity: 1 #!Ref  NumberOfWorkerNodes    
